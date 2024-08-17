@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %} search {% endblock  %}
+{% block content %}
+
+<h1>Search Results for "{{ query }}"</h1>
+
+    {% if results %}
+    <div class="container row gap-3">
+        {% for twit in results %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{twit.photo.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{twit.user.username}}</h5>
+                  <p class="card-text">{{twit.text}}</p>
+        
+                  {% if twit.user == user %}
+                  <a href="{% url 'twit_edit' twit.id %}" class="btn btn-primary">Edit</a>
+                  <a href="{% url 'twit_delete' twit.id %}" class="btn btn-danger">Delete</a>
+                  {% endif %}
+                  
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+{% endblock  %}

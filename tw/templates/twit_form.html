@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %} 
+{% if form.instance.pk %}
+edit
+{% else %}
+create
+{% endif %}
+{% endblock  %}
+
+{% block content %}
+
+{% comment %} <h1 class="text-center">{% if form.instance.pk %}
+    welcome Edit Twit
+    {% else %}
+    welcome Create Twit
+    {% endif %}</h1> {% endcomment %}
+
+<h2>
+    {% if form.instance.pk %}
+    Edit Twit
+    {% else %}
+    Create Twit
+    {% endif %}
+</h2>
+<form method="post" enctype="multipart/form-data" class="form">
+{% csrf_token %}
+    {% comment %} {{form}} {% endcomment %}
+    {{form.as_p}}
+    <button class="btn btn-warning" type="submit">Submit</button>
+</form>
+<a href="{% url 'twit_list' %}">Back to twit list</a>
+
+{% endblock  %}
